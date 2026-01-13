@@ -10,12 +10,12 @@ local function updateUI(state)
 	if state then
 		button.Text = "On"
 		button.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
-		button.TextColor3 = Color3.fromRGB(255, 255, 255)
+		button.TextColor3 = Color3.fromRGB(0, 0, 0)
 		lightPart.BrickColor = BrickColor.new("White")
 	else
 		button.Text = "Off"
 		button.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
-		button.TextColor3 = Color3.fromRGB(255, 255, 255)
+		button.TextColor3 = Color3.fromRGB(0, 0, 0)
 		lightPart.BrickColor = BrickColor.new("Black")
 	end
 end

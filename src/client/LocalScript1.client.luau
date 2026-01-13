@@ -1,5 +1,10 @@
+local Players = game:GetService("Players")
 local MarketplaceService = game:GetService("MarketplaceService")
 
-script.Parent.MouseButton1Click:Connect(function()
-MarketplaceService:PromptProductPurchase(game.players.LocalPlayer, 3511119685)
+local player = Players.LocalPlayer
+local gui = player:WaitForChild("PlayerGui"):WaitForChild("ScreenGui")
+local button = gui:WaitForChild("BuyButton")
+
+button.MouseButton1Click:Connect(function()
+    MarketplaceService:PromptProductPurchase(player, 3511119685)
 end)
