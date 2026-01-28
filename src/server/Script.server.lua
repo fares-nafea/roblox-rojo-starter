@@ -1,41 +1,31 @@
 local MarketplaceService = game:GetService("MarketplaceService")
-local TouchInputService = game:GetService("TouchInputService")
 
 local Products = {}
 
 Products[3511119685] = function(player)
-    if player then
-        if player.Character then
-            player.Character.Humanoid.WalkSpeed = 50
+	if not player then return false end
 
-            task.delay(20, function()
-                player.Character.Humanoid.WalkSpeed = 16
-            end)
-        end
-        
-        return true
-    else
-        return false
-    end
+	local leaderstats = player:FindFirstChild("leaderstats")
+	if not leaderstats then return false end
+
+	local cash = leaderstats:FindFirstChild("Cash")
+	if not cash then return false end
+
+	cash.Value += 100
+	return true
 end
 
 MarketplaceService.ProcessReceipt = function(receiptInfo)
-	-- userId
-	-- developer product Id
-	print(receiptInfo)
-
-	local playerId = receiptInfo.PlayerId
+	local player = game.Players:GetPlayerByUserId(receiptInfo.PlayerId)
 	local productId = receiptInfo.ProductId
 
-	local Player = game.Players:GetPlayerByUserId(playerId)
-
 	if Products[productId] then
-        local result = Products[productId](Player)
+		local success = Products[productId](player)
 
-        if result then
-            return Enum.ProductPurchaseDecision.PurchaseGranted
-        else
-            return Enum.ProductPurchaseDecision.NotProcessedYet
-        end
-    end
+		if success then
+			return Enum.ProductPurchaseDecision.PurchaseGranted
+		else
+			return Enum.ProductPurchaseDecision.NotProcessedYet
+		end
+	end
 end
