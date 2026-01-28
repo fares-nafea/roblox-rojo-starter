@@ -14,19 +14,26 @@ end
 
 local Template = {
     Cash = 50,
-    XP = 0,
+    XP = 5,
     Pets = {},
     DailyLoginStreak = 1
 }
 
 game.Players.PlayerAdded:Connect(function(Player)
-    pcall(function()
-        local Data = DataStore:GetAsync(tostring(Player.UserId))
-        if Data == nil then
-            Data = deepCopy(Template)
-            DataStore:SetAsync(tostring(Player.UserId), Data) 
-        end
-        print(Data.XP)
-        print(Data.Cash)
+    local success, Data = pcall(function()
+        return DataStore:UpdateAsync(tostring(Player.UserId), function(oldData)
+            if oldData == nil then
+                return deepCopy(Template)
+            else
+                return oldData
+            end
+        end)
     end)
+
+    if success then
+        print("XP:", Data.XP)
+        print("Cash:", Data.Cash)
+    else
+        warn("Failed to load data for player:", Player.Name)
+    end
 end)
