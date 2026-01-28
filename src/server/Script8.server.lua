@@ -6,4 +6,4 @@ local TotalVector = Vector + VectorNum2
 
 print(TotalVector)
 
-game.Workspace.Part.Position = TotalVector
+game.Workspace.MovedPart.Position = TotalVector
