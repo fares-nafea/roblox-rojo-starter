@@ -1,6 +1,4 @@
-local KickedPlayers = {
-    7998496836
-}
+local KickedPlayers = {}
 
 game.Players.PlayerAdded:Connect(function(player)
 
