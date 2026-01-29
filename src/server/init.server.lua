@@ -5,6 +5,6 @@ game.Players.PlayerAdded:Connect(function(pl)
 	
 	local Cash = Instance.new("IntValue")
 	Cash.Name = "Cash"
+	Cash.Value = 500
 	Cash.Parent = leaderstats
-	
 end)
